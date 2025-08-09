@@ -7,16 +7,36 @@ const everyoneCommand = require("../../commands/everyone");
 const adminCommand = require("../../commands/admin");
 const kickCommand = require("../../commands/kick");
 const factCommand = require("../../commands/fact");
+const muteCommand = require("../../commands/mute");
+const unmuteCommand = require("../../commands/unmute");
+const mutedUsers = require("../../utils/mutedUsers");
 
 async function handleMessage(client, msg) {
   const chat = await msg.getChat();
   const contact = await msg.getContact();
   const senderName = contact.pushname || contact.name || msg.from;
   const messageText = msg.body.toLowerCase();
-   console.log(`[${chat.id._serialized}] ${senderName}: ${msg.body}`);
+
+  console.log(`[${chat.id._serialized}] ${senderName}: ${msg.body}`);
 
   const isFromAllowedGroup = chat.isGroup && allowedGroupIds.has(chat.id._serialized);
   if (!isFromAllowedGroup) return;
+
+  // === Ignore + delete muted users' messages ===
+  const mutedSet = mutedUsers.get(chat.id._serialized) || new Set();
+  if (mutedSet.has(contact.id._serialized)) {
+    try {
+      // Delete their message for everyone
+      await msg.delete(true).catch(err => {
+        console.error(`Failed to delete message:`, err);
+      });
+
+      console.log(`🗑 Deleted message from muted user ${senderName} in ${chat.name}`);
+    } catch (err) {
+      console.error(`Failed to delete muted message from ${senderName}:`, err);
+    }
+    return;
+  }
 
   console.log(`[${chat.name}] ${senderName}: ${msg.body}`);
 
@@ -38,8 +58,18 @@ async function handleMessage(client, msg) {
   }
 
   if (messageText.includes("@fact")) {
-  return factCommand(msg);
-}
+    return factCommand(msg);
+  }
+
+  if (messageText.startsWith("@mute")) {
+    return muteCommand(msg, chat, senderName, client);
+  }
+
+  if (messageText.startsWith("@unmute")) {
+    return unmuteCommand(msg, chat, senderName, client);
+  }
+
+  console.log('hiiii')
 
   // === Abusive language warnings ===
   if (blacklist.some((word) => new RegExp(`\\b${word}\\b`).test(messageText))) {
