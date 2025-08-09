@@ -1,0 +1,6 @@
+# WhatsApp Web.js session data
+.wwebjs_auth/
+.wwebjs_cache/
+
+# Node.js dependencies
+node_modules/
