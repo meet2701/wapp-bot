@@ -7,14 +7,8 @@ const client = new Client({
   authStrategy: new LocalAuth({ clientId: "main" }),
   puppeteer: {
     headless: true,
-    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || "/usr/bin/chromium",
-    args: [
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--disable-dev-shm-usage",
-      "--single-process",
-      "--disable-gpu"
-    ],
+    executablePath: "/usr/bin/chromium", // Installed by apt-get
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   },
 });
 
