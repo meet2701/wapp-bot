@@ -69,8 +69,6 @@ async function handleMessage(client, msg) {
     return unmuteCommand(msg, chat, senderName, client);
   }
 
-  console.log('hiiii')
-
   // === Abusive language warnings ===
   if (blacklist.some((word) => new RegExp(`\\b${word}\\b`).test(messageText))) {
     const userKey = `${msg.author || msg.from}_${chat.id._serialized}`;
