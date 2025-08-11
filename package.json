@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "bash ./install-packages.sh",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
