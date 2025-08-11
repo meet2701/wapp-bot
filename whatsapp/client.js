@@ -4,9 +4,20 @@ const { handleMessage } = require("./events/messageHandler");
 const { handleWelcome } = require("./events/welcomeHandler");
 
 const client = new Client({
-  authStrategy: new LocalAuth({ clientId: "main" }), // <-- persists session across restarts
-  puppeteer: { headless: true, args: ["--no-sandbox"] },
+  authStrategy: new LocalAuth({ clientId: "main" }),
+  puppeteer: {
+    headless: true,
+    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || "/usr/bin/chromium",
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--single-process",
+      "--disable-gpu"
+    ],
+  },
 });
+
 
 // QR code for first-time login
 client.on("qr", qr => {
