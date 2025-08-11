@@ -15,19 +15,7 @@ async function handleWelcome(client, notification) {
     const newMemberName = contact.pushname || contact.name || "Member";
 
     const welcomeMessage =
-`✨🌸 *Welcome to ${chat.name}!* 🌸✨
-Hey *${newMemberName}*, we’re so happy you joined our anime family! 🏯💮
-
-🗡️ Grab your katana, summon your stand, or just relax in the hot springs — your adventure begins here! 🍡
-
-🎯 Before you start your journey, tell us:
-1️⃣ What's your favorite anime? 🎥
-2️⃣ Who’s your ultimate waifu/husbando? 💖
-3️⃣ Favorite movie? 🍿
-4️⃣ Games you love to play? 🎮
-
-Let’s make some legendary memories together! 🚀
-`;
+`*🎉 Welcome to ${chat.name}*,*${newMemberName}*, 🚀 Glad to have you here 🤝 Let’s make this group awesome! 💬✨`;
 
     await chat.sendMessage(welcomeMessage, { mentions: [contact] });
   } catch (err) {

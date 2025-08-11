@@ -1,34 +1,22 @@
+// ===== Allowed Group IDs =====
+// Add the WhatsApp Group IDs here where your bot should be active.
+// Example format: "1234567890-123456789@g.us"
 const allowedGroupIds = new Set([
-  "120363030414674555@g.us",
-  "120363044643759498@g.us",
-  "120363267582104256@g.us",
-  "120363418541813477@g.us",
-  "120363420560838116@g.us",
-  "120363417884183297@g.us",
-  "120363385918467697@g.us",
-  '120363414056929342@g.us',
-  "120363159874666524@g.us",
-  "120363264918819223@g.us",
-  '919427951390-1425829214@g.us'
+  // "group-id-here"
 ]);
 
+// ===== Warning Limits =====
+// Map of group IDs to their maximum allowed warnings before taking action.
+// Example: ["group-id-here", 3] means 3 warnings max in that group.
 const warningLimits = new Map([
-  ["120363030414674555@g.us", 5],
-  ["120363044643759498@g.us", 5],
-  ["120363267582104256@g.us", 3],
-  ["120363418541813477@g.us", 5],
-  ["120363420560838116@g.us", 5],
-  ["120363417884183297@g.us", 5],
-  ["120363385918467697@g.us", 5],
-  ["120363414056929342@g.us", 5],
-  ["120363159874666524@g.us", 5],
-  ["120363264918819223@g.us", 5],
-  ["919427951390-1425829214@g.us", 5]
+  // ["group-id-here", maxWarnings]
 ]);
 
+// ===== Blacklist =====
+// Words to block in chats.
+// Example: "badword"
 const blacklist = [
-  "fuck", "shit", "bitch", "bc", "mc", "chutiya", "mf", "nigga", "idiot", "harami",
-  "kutta", "kamina", "mkc", "bkl", "gandu", "gendu", "tf", "bsdk", '♥️da', '♥️de', 'madarchod', 'behenchod', 'nigge', 'niggao'
+  // "word1", "word2"
 ];
 
 module.exports = { allowedGroupIds, warningLimits, blacklist };
